@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { DateTime } from "luxon";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom/dist";
+import { FaRegNewspaper } from "react-icons/fa";
 
 function Notification() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [notification, setNotification] = useState([]);
@@ -14,7 +17,7 @@ function Notification() {
       try {
         const res = await axios.get("/api/notification");
         console.log(res.data);
-        setNotification(res.data);
+        setNotification(res.data.reverse());
       } catch (error) {
         console.error(error);
       }
@@ -69,7 +72,7 @@ function Notification() {
                 fontSize: "0.75rem",
               }}
             >
-              {notification?.reverse().map((item, idx) => {
+              {notification?.map((item, idx) => {
                 const now = DateTime.now();
                 const date = DateTime.fromSeconds(item.timestamp / 1000);
                 const diff = now.diff(date, ["hours"]);
@@ -82,16 +85,17 @@ function Notification() {
                       marginBottom: "0.5rem",
                     }}
                     key={idx}
+                    onClick={() => navigate("/details/" + item._id)}
                   >
                     <div>
                       <div
                         style={{
                           width: "30px",
                           height: "30px",
-                          borderRadius: "50%",
-                          background: "rgba(0, 0, 0, 0.1)",
                         }}
-                      />
+                      >
+                        <FaRegNewspaper size={21} />
+                      </div>
                     </div>
                     <div>
                       <div
