@@ -4,6 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useTranslation } from "react-i18next";
+import { DateTime } from "luxon";
+import { TbBrandOpenSource } from "react-icons/tb";
 
 function Search() {
   const [data, setData] = useState([]);
@@ -75,6 +77,9 @@ function Search() {
               height: "100%",
               borderRadius: "0.5rem",
               overflow: "hidden",
+              background: "#ccc",
+              padding: "1rem 0",
+              maxHeight: "350px",
             }}
             modules={[Navigation, Pagination]}
             navigation
@@ -92,6 +97,9 @@ function Search() {
             }}
           >
             {data?.slice(0, 11).map((item, idx) => {
+              const now = DateTime.now();
+              const date = DateTime.fromSeconds(item.timestamp / 1000);
+              const diff = now.diff(date, ["hours"]);
               return (
                 <SwiperSlide key={idx}>
                   <a
@@ -134,9 +142,22 @@ function Search() {
                           fontSize: "0.875rem",
                           fontWeight: "300",
                           width: "100%",
+                          display: "flex",
+                          gap: "0.5rem",
+                          alignItems: "center",
                         }}
                       >
-                        {item.source}
+                        <div
+                          style={{
+                            background: "#fff",
+                            borderRadius: "100dvw",
+                          }}
+                        >
+                          <TbBrandOpenSource color="red" size={20} />
+                        </div>
+                        {` ${item.source} | ${diff.hours.toFixed(0)} ${t(
+                          "hoursago"
+                        )}`}
                       </div>
                     </div>
                   </a>
