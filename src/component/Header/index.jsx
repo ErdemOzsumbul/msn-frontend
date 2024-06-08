@@ -6,18 +6,19 @@ import Settings from "../Settings";
 import Notification from "../Notification";
 import { useTranslation } from "react-i18next";
 import { CiSearch } from "react-icons/ci";
+import { Bounce, toast } from "react-toastify";
 
 function Header() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     if (e.target.value === "") return navigate("/");
     navigate("/search?query=" + e.target.value);
   };
-
+  console.log(user?.email, user?.name, user?.surname);
   return (
     <>
       <div
@@ -84,7 +85,22 @@ function Header() {
             onClick={() => {
               if (user.email) {
                 dispatch(userActions.logout());
-                window.open("/", "_self");
+                localStorage.clear("email");
+                localStorage.clear("name");
+                localStorage.clear("surname");
+                localStorage.clear("picture");
+                toast.success("Çıkış Yapıldı.", {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                  transition: Bounce,
+                });
+                navigate("/");
                 return;
               }
               navigate("/login");
@@ -100,7 +116,7 @@ function Header() {
               alignItems: "center",
             }}
           >
-            {user.email ? (
+            {user.email && user.name && user.surname ? (
               user.picture ? (
                 <img
                   src={user.picture}
@@ -111,7 +127,9 @@ function Header() {
                     borderRadius: "100dvw",
                   }}
                 />
-              ) : null
+              ) : (
+                user.name[0] + user.surname[0]
+              )
             ) : (
               <AiOutlineUser />
             )}

@@ -17,7 +17,10 @@ import "@/assets/css/reset.css";
 import "@/assets/css/index.css";
 import "@/assets/css/container.css";
 
+import "react-toastify/dist/ReactToastify.css";
+
 import "./i18n";
+import { ToastContainer } from "react-toastify";
 
 axios.defaults.baseURL = "https://msn-backend-erdemozsumbul.vercel.app";
 
@@ -30,5 +33,17 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </BrowserRouter>
       </GoogleOAuthProvider>
     </Provider>
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
   </>
 );

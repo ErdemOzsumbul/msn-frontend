@@ -5,8 +5,22 @@ import Login from "./page/Login";
 import Register from "./page/Register";
 import Search from "./page/Search";
 import Details from "./page/Details";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { userActions } from "./redux";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      userActions.login({
+        name: localStorage.getItem("name"),
+        surname: localStorage.getItem("surname"),
+        email: localStorage.getItem("email"),
+        picture: localStorage.getItem("picture") || null,
+      })
+    );
+  }, []);
   return (
     <>
       <Routes>

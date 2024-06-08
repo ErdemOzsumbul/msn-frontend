@@ -6,7 +6,7 @@ import FixedBar from "../../component/FixedBar";
 import { useSelector } from "react-redux";
 
 function Details() {
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const [details, setDetails] = useState(null);
   const params = useParams();
 
@@ -21,9 +21,10 @@ function Details() {
     }
     handleDetails();
   }, [params]);
+
   return (
     <>
-      {!user.email && <FixedBar />}
+      {user.email && <FixedBar />}
       <div>
         <div
           className="container"

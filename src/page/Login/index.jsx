@@ -9,9 +9,12 @@ import { userActions } from "../../redux";
 import { useDispatch } from "react-redux";
 import CustomInput from "../../component/CustomInput";
 import "./index.css";
+import { Bounce, toast } from "react-toastify";
+
 function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     try {
       const res = await axios.post("/api/auth/login", {
         name: values.name,
@@ -19,9 +22,36 @@ function Login() {
         email: values.email,
         password: md5(values.password),
       });
+      dispatch(userActions.login(res.data));
+      localStorage.setItem("email", res.data.email);
+      localStorage.setItem("name", res.data.name);
+      localStorage.setItem("surname", res.data.surname);
+      localStorage.setItem("picture", res.data.picture);
       navigate("/");
+      toast.success("Giriş Başarılı.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     } catch (error) {
       console.error(error);
+      toast.error("E-mail ya da şifre yanlış.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
 
@@ -116,12 +146,15 @@ const GoogleButton = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = useGoogleLogin({
-    onSuccess: async response => {
+    onSuccess: async (response) => {
       try {
         const res = await axios.post("/api/auth/googlelogin", {
           code: response.code,
         });
-        console.log(res);
+        localStorage.setItem("email", res.data.email);
+        localStorage.setItem("name", res.data.name);
+        localStorage.setItem("surname", res.data.surname);
+        res.data.picture && localStorage.setItem("picture", res.data.picture);
         dispatch(userActions.login(res.data));
         navigate("/");
       } catch (error) {

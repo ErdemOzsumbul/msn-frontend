@@ -4,10 +4,11 @@ import * as Yup from "yup";
 import md5 from "md5";
 import CustomInput from "../../component/CustomInput";
 import { useNavigate } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
 
 function Register() {
   const navigate = useNavigate();
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     try {
       const res = await axios.post("/api/auth/register", {
         name: values.name,
@@ -17,8 +18,30 @@ function Register() {
         province: values.province,
         district: values.district,
       });
+      toast.success("Kayıt başarılı.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     } catch (error) {
       console.error(error);
+      toast.error("Bir şey oldu!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
 
@@ -45,7 +68,7 @@ function Register() {
       province: Yup.string().required("Required"),
       district: Yup.string().required("Required"),
     }),
-    onSubmit: value => handleSubmit(value),
+    onSubmit: (value) => handleSubmit(value),
   });
   return (
     <>

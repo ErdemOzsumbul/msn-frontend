@@ -3,8 +3,28 @@ import { BiSolidDislike } from "react-icons/bi";
 import { FaShareSquare } from "react-icons/fa";
 import { ImHeadphones } from "react-icons/im";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import { useParams } from "react-router-dom/dist";
+import { Bounce, toast } from "react-toastify";
 
 function FixedBar() {
+  const params = useParams();
+
+  const handleCopy = (id) => {
+    navigator.clipboard.writeText(
+      "https://msn-frontend-erdemozsumbul.vercel.app/details/" + params.id
+    );
+    toast.success("Link Kopyalandı.", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+  };
   return (
     <>
       <div
@@ -75,6 +95,7 @@ function FixedBar() {
             cursor: "pointer",
             borderRadius: "0.5rem",
           }}
+          onClick={handleCopy}
         >
           <FaShareSquare />
         </div>
