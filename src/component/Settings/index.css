@@ -1,0 +1,9 @@
+.settings-wrapper {
+  cursor: pointer;
+}
+.settings-wrapper .settings-dropdown {
+  display: none;
+}
+.settings-wrapper:hover .settings-dropdown {
+  display: block;
+}

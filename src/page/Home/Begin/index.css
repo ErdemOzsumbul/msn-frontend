@@ -1,0 +1,24 @@
+.begin-left {
+  width: 65%;
+  background: black;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+}
+
+.begin-right {
+  width: 30%;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 1200px) {
+  .begin-right {
+    display: none;
+  }
+  .begin-left {
+    width: 100%;
+  }
+}

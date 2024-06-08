@@ -1,0 +1,14 @@
+.news-mini-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 350px;
+}
+
+@media only screen and (max-width: 768px) {
+  .news-mini-card {
+    min-width: 100%;
+  }
+}

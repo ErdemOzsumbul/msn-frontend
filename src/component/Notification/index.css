@@ -1,0 +1,9 @@
+.notification-wrapper {
+  cursor: pointer;
+}
+.notification-wrapper .notification-dropdown {
+  display: none;
+}
+.notification-wrapper:hover .notification-dropdown {
+  display: block;
+}

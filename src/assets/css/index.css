@@ -1,0 +1,30 @@
+:root {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  display: flex;
+  width: 100dvw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.swiper-pagination-bullet {
+  background: #fff;
+  opacity: 0.4;
+  transition: 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  width: 35px;
+  border-radius: 10px;
+  background: #fff;
+  opacity: 1;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 20px;
+  font-weight: 700;
+}
