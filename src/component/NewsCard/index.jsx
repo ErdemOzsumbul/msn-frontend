@@ -18,6 +18,7 @@ function NewsCard(props) {
           maxWidth: "300px",
           minHeight: "325px",
           margin: " 1rem 0",
+          cursor: "pointer",
         }}
         onClick={() => navigate(`/details/${news?._id}`)}
       >

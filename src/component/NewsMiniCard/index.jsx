@@ -11,6 +11,7 @@ function NewsMiniCard(props) {
           boxShadow: shadow ? "0 0 10px 0 rgba(0, 0, 0, 0.1)" : "",
           width: full ? "100% " : "30%",
           minWidth: full ? "100%" : "",
+          cursor: "pointer",
         }}
         className="news-mini-card"
         onClick={() => navigate(`/details/${news?._id}`)}

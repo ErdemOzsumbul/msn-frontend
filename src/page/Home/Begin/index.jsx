@@ -5,7 +5,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./index.css";
 function Begin() {
-  const news = useSelector(state => state.news.items);
+  const news = useSelector((state) => state.news.items);
   const navigate = useNavigate();
   return (
     <>
@@ -23,73 +23,90 @@ function Begin() {
           }}
         >
           <div className="begin-left">
-            <Swiper
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: "0.5rem",
-                overflow: "hidden",
-              }}
-              modules={[Navigation, Pagination]}
-              navigation
-              pagination
-              loop
-            >
-              {news?.slice(0, 11).map((item, idx) => {
-                return (
-                  <SwiperSlide
-                    key={idx}
-                    onClick={() => navigate(`/details/${item._id}`)}
-                  >
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        position: "relative",
-                      }}
+            {news.length > 0 ? (
+              <Swiper
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "0.5rem",
+                  overflow: "hidden",
+                }}
+                modules={[Navigation, Pagination]}
+                navigation
+                pagination
+                loop
+              >
+                {news?.slice(0, 11).map((item, idx) => {
+                  return (
+                    <SwiperSlide
+                      key={idx}
+                      onClick={() => navigate(`/details/${item._id}`)}
                     >
-                      <img
-                        src={item.image}
-                        alt={item.title}
+                      <div
                         style={{
                           width: "100%",
                           height: "100%",
-                        }}
-                      />
-                      <div
-                        style={{
-                          position: "absolute",
-                          bottom: "0",
-                          width: "100%",
-                          padding: "1rem",
-                          background: "rgba(0,0,0,0.5)",
-                          color: "#fff",
+                          position: "relative",
+                          cursor: "pointer",
                         }}
                       >
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                          }}
+                        />
                         <div
                           style={{
-                            fontSize: "1.25rem",
-                            fontWeight: "600",
+                            position: "absolute",
+                            bottom: "0",
                             width: "100%",
+                            padding: "1rem",
+                            background: "rgba(0,0,0,0.5)",
+                            color: "#fff",
                           }}
                         >
-                          {item.title}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: "0.875rem",
-                            fontWeight: "300",
-                            width: "100%",
-                          }}
-                        >
-                          {item.source}
+                          <div
+                            style={{
+                              fontSize: "1.25rem",
+                              fontWeight: "600",
+                              width: "100%",
+                            }}
+                          >
+                            {item.title}
+                          </div>
+                          <div
+                            style={{
+                              fontSize: "0.875rem",
+                              fontWeight: "300",
+                              width: "100%",
+                            }}
+                          >
+                            {item.source}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  aspectRatio: "1/1",
+                  background: "#000",
+                  color: "#fff",
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "30px",
+                }}
+              >
+                No Data
+              </div>
+            )}
           </div>
           <div className="begin-right">
             <div
@@ -100,7 +117,9 @@ function Begin() {
                 boxShadow: "0 0 10px rgba(0,0,0,0.1)",
                 overflow: "hidden",
                 aspectRatio: "1/1",
+                cursor: "pointer",
               }}
+              onClick={() => navigate(`/details/${news?.[39]?._id}`)}
             >
               <img
                 src={news?.[39]?.image || ""}
