@@ -34,7 +34,7 @@ function FixedBar() {
     <>
       <div
         style={{
-          position: "absolute",
+          position: "fixed",
           bottom: "1rem",
           left: "2rem",
           filter: "drop-shadow(0 0 1rem rgba(0,0,0,0.2))",
