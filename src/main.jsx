@@ -19,7 +19,7 @@ import "@/assets/css/container.css";
 
 import "./i18n";
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://msn-backend-erdemozsumbul.vercel.app";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
